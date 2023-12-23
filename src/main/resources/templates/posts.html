@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alla Inlägg</title>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<h1>Här listas alla Inlägg</h1>
+    <div id="form2">
+        <a class="buttonheader" th:href="@{/}">Tillbaka till startsidan</a>
+    </div>
+    <div id="list" th:each=" diary : ${diaries}">
+        <div>
+            <h2 th:text="${diary.title}"></h2>
+            <p th:text="${#temporals.format(diary.date, 'yyyy-MM-dd')}"></p>
+            <p th:text="${diary.content}"></p>
+            <a class="button1" th:href="@{'/edit/' + ${diary.id}}">Ändra</a>
+            <form th:action="@{'/deleteFromPosts/' + ${diary.id}}" method="post">
+                <button type="submit">Ta bort inlägg</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

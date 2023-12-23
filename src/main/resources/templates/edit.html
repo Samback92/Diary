@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ändra Inlägg</title>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+    <h1>Ändra Inlägg</h1>
+    <div id="button-container">
+        <div>
+            <a class="buttonheader" th:href="@{/posts}">Visa alla inlägg</a>
+            <a class="buttonheader" th:href="@{/}">Till startsidan</a>
+        </div>
+    </div>
+        <div id="editform">
+            <h3>Fyll i vad du vill ändra på:</h3>
+            <form th:action="@{'/edit/' + ${diary.id}}" th:object="${diary}" method="post">
+                <input type="date" th:field="*{date}" placeholder="Datum" required>
+                <input type="text" placeholder="Rubrik" th:field="*{title}" required><br>
+                <div id="textarea">
+                    <textarea th:field="*{content}" placeholder="Text" required></textarea>
+                </div>
+                <button type="submit">Spara inlägg</button>
+            </form>
+        </div>
+</body>
+</html>
