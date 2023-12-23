@@ -11,15 +11,23 @@
     <div id="form2">
         <a class="buttonheader" th:href="@{/}">Tillbaka till startsidan</a>
     </div>
-    <div id="list" th:each=" diary : ${diaries}">
+    <div id="list" th:each="diary : ${diaries}">
         <div>
+            <div class="info-label">Rubrik:</div>
             <h2 th:text="${diary.title}"></h2>
+            
+            <div class="info-label">Datum:</div>
             <p th:text="${#temporals.format(diary.date, 'yyyy-MM-dd')}"></p>
+            
+            <div class="info-label">Innehåll:</div>
             <p th:text="${diary.content}"></p>
-            <a class="button1" th:href="@{'/edit/' + ${diary.id}}">Ändra</a>
-            <form th:action="@{'/deleteFromPosts/' + ${diary.id}}" method="post">
-                <button type="submit">Ta bort inlägg</button>
-            </form>
+            
+            <div id="button-container">
+                <a class="button1" th:href="@{'/edit/' + ${diary.id}}">Ändra</a>
+                <form th:action="@{'/deleteFromIndex/' + ${diary.id}}" method="post">
+                    <button class="button1" type="submit">Ta bort inlägg</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>

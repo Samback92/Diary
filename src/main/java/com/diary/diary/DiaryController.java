@@ -26,7 +26,7 @@ public class DiaryController {
             .collect(Collectors.toList());
         model.addAttribute("diaries", diaries);
         model.addAttribute("diary", new Diary());
-        System.out.println("Diaries: " + diaries.size());
+       // System.out.println("Diaries: " + diaries.size());
         return "index";
     }
 
@@ -34,14 +34,14 @@ public class DiaryController {
     @PostMapping("/new-post")
     public String addPost(@ModelAttribute Diary diary) {
         repository.save(diary);
-        System.out.println("Ny post från " + diary);
+       // System.out.println("Ny post från " + diary);
         return "redirect:/";
     }
 
     // För att ta bort från indexsidan och omdirigera tillbaka till indexsidan
     @PostMapping("/deleteFromIndex/{id}")
     public String deletePostFromIndex(@PathVariable Long id) {
-        System.out.println("delete mapping from index " + id);
+       // System.out.println("delete mapping from index " + id);
         repository.deleteById(id);
         return "redirect:/";
     }
@@ -49,7 +49,7 @@ public class DiaryController {
     // För att ta bort från postssidan och omdirigera tillbaka till postssidan
     @PostMapping("/deleteFromPosts/{id}")
     public String deletePostFromPosts(@PathVariable Long id) {
-        System.out.println("delete mapping from posts " + id);
+       // System.out.println("delete mapping from posts " + id);
         repository.deleteById(id);
         return "redirect:/posts";
     }
@@ -57,7 +57,6 @@ public class DiaryController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") long id, Model model) {
         Diary diary = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid diary Id:" + id));
-
         model.addAttribute("diary", diary);
         return "edit";
     }
@@ -67,7 +66,7 @@ public class DiaryController {
         diary.setId(id);
         repository.save(diary);
         model.addAttribute("diaries", repository.findAll());
-        System.out.println("uppdate mapping " + diary.getContent());
+       // System.out.println("uppdate mapping " + diary.getContent());
         return "redirect:/posts";
     }
 
